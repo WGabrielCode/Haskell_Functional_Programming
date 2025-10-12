@@ -1,0 +1,32 @@
+import Data.List 
+
+asc :: Int -> Int -> [Int]
+asc n m 
+    | n > m = []
+    | otherwise = n : asc ( n+1 ) m 
+
+sumList :: [Int] -> Int
+sumList [] = 0
+sumList ( x:xs ) = x + sum xs
+
+evens :: [Int] -> [Int]
+evens [] = []
+evens ( x:xs )
+    | mod x 2 == 0 = x : evens xs 
+    | otherwise    = evens xs 
+
+main = 
+    let 
+        arr = asc 1 10 
+    in do
+        print( arr )
+        print( head arr )
+        print( length arr )
+        print( tail arr )
+        print( init arr )
+        print( null arr  )
+        --print( and arr ) [boolean] tylko  
+        --print( or arr )  [boolean] tylko 
+        print( [ 2 * x | x <- arr , x > 5 ] )
+        print( sumList arr )
+        print( evens arr ) 
