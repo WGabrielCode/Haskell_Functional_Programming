@@ -1,0 +1,5 @@
+addTuples :: [( Int,Int )] -> [Int]
+addTuples xs = [ x+y | (x,y) <- xs ]
+
+main = 
+    print( addTuples [ (1,2) , (5,-20) , (1,10000) ] )
