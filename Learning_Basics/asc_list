@@ -1,0 +1,14 @@
+
+asc :: Int -> Int -> [Int]
+asc n m 
+    | m < n = []
+    | m == n = [m]
+    | m > n = n : asc ( n+1 ) m
+
+main = 
+    let 
+        n = 1
+        m = 6 
+    
+    in
+        print( asc n m  )
