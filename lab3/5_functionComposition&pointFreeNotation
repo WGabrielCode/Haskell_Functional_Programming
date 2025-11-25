@@ -1,0 +1,45 @@
+import Data.List
+
+sortDesc :: Ord a => [a] -> [a]
+sortDesc xs =  ( reverse . sort  ) xs
+
+main =
+    let 
+        f = (+1) -- vs. let f x = x + 1 vs. let f x = (+1) x
+        g = (*2) -- vs. let g x = x * 2 vs. let g x = (*2) x
+        h = (^3) -- vs. let h x = x ^ 3 vs. let h x = (^3) x
+
+        fg = f . g      -- vs. let fg x  = (f . g) x
+        gh = g . h      -- vs. let gh x  = (g . h) x
+        fgh = f . g . h -- vs. let fgh x = (f . g . h) x
+        u2 x y = x^2 + y^2
+        
+        w3 = \x y z -> sqrt (x^2 + y^2 + z^2)
+        
+    in do 
+        print( fgh 3 )
+        --print( f . g . h 3 ) -- wrong!!!
+        print( (f . g . h) 3 )
+        print( "--1--" )
+
+        print( (f . g . h) 3 == f (g (h (3))) )
+        print((f . id) 3 == f 3)
+        print((f . gh) 3 == (fg . h) 3)
+        print((f . (g . h)) 3 == ((f . g) . h) 3)
+        print(fgh 3 == (f . gh) 3)
+        print( "--2--" )
+
+        --print((f . g) 3 == (.) f g 3) --wrong
+        print((f . (u2 4) . g) 3)
+        print((f . u2 4 . g) 3)
+        print(((u2 1) . (u2 2) . (u2 3)) 1)
+        print( ( u2 1 . u2 2 . u2 3 ) 1 )
+        print(((+) 2 . g . h) 3)
+        print(((2+) . g . h) 3)
+
+        print( "--3--" )
+        print( sortDesc [1..5] )
+        print( (f . w3 1 2 . h) 3 )
+
+
+
